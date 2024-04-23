@@ -155,7 +155,17 @@ namespace GHIElectronics.TinyCLR.Devices.Signals {
         public DigitalSignal(GpioPin pin) {
             this.pinNumber = pin.PinNumber;
 
-            this.nativeEventDispatcher = NativeEventDispatcher.GetDispatcher($"GHIElectronics.TinyCLR.NativeEventNames.DigitalSignal.Event{pin.PinNumber}");
+            if (this.pinNumber == 0) {
+                this.nativeEventDispatcher = NativeEventDispatcher.GetDispatcher("GHIElectronics.TinyCLR.NativeEventNames.DigitalSignal.Event0");
+            }
+            else if (this.pinNumber == 1) {
+                this.nativeEventDispatcher = NativeEventDispatcher.GetDispatcher("GHIElectronics.TinyCLR.NativeEventNames.DigitalSignal.Event1");
+            }
+            else if (this.pinNumber == 19) {
+                this.nativeEventDispatcher = NativeEventDispatcher.GetDispatcher("GHIElectronics.TinyCLR.NativeEventNames.DigitalSignal.Event19");
+            }
+
+            //this.nativeEventDispatcher = NativeEventDispatcher.GetDispatcher($"GHIElectronics.TinyCLR.NativeEventNames.DigitalSignal.Event{pin.PinNumber}");
 
             this.nativeEventDispatcher.OnInterrupt += this.OnInterruptEventHandler;
 
