@@ -118,7 +118,7 @@ namespace System.Net
                 this.m_headersSend();
             }
 
-            this.m_Stream.Close();
+            this.m_Stream?.Close();
         }
 
         /// <summary>
@@ -132,7 +132,7 @@ namespace System.Net
                 this.m_headersSend();
             }
 
-            this.m_Stream.Flush();
+            this.m_Stream?.Flush();
         }
 
         /// <summary>
