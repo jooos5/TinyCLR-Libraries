@@ -186,6 +186,15 @@ namespace System.Net
 
             this.m_Stream.Write(buffer, offset, size);
         }
+
+        public bool WriteHeaderOnClose(byte[] buffer, int offset, int size) {
+            if (this.m_headersSend != null) {
+                // Calls HttpListenerResponse.SendHeaders. HttpListenerResponse.SendHeaders sets m_headersSend to null.
+                this.m_headersSend();
+            }
+
+            return this.m_Stream.WriteHeaderOnClose(buffer, offset, size);
+        }
     }
 }
 
